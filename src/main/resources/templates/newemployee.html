@@ -11,36 +11,43 @@
 <body>
     <div layout:fragment="content">
         <div class="row mt-3">
-            <div class="h1">Edit Employee</div>
+            <div class="h1">Add New Employee</div>
         </div>
         <div class="row mt-3">
             <div class="col-md-12">
                 <div class="container">
-                    <form action="#">
+                    <form th:action="@{/employee/add}" method="post" th:object="${employee}">
                         <div class="mb-3 row">
                             <label for="name" class="col-sm-3 col-form-label">Name</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Product Name">
+                                <input type="text" class="form-control" name="name" id="name"
+                                    placeholder="Employee Name" th:field="*{name}">
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="price" class="col-sm-3 col-form-label">Price</label>
+                            <label for="salary" class="col-sm-3 col-form-label">Salary</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="price" id="price" placeholder="999.99">
+                                <input type="text" class="form-control" name="salary" id="salary" placeholder="999.99" th:field="*{salary}">
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label for="project" class="col-sm-3 col-form-label">Project</label>
+                            <div class="col-sm-9">
+                                <select class="form-select" th:field="*{project}" required>
+                                    <option value="">Select project</option>
+
+                                    <option th:each="project : ${projecties}" th:value="${project.id}" th:text="${project.name}"></option>
+                                </select>
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="unitInStock" class="col-sm-3 col-form-label">Unit in stock</label>
+                            <label for="department" class="col-sm-3 col-form-label">Department</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="unitInStock" id="unitInStock"
-                                    placeholder="100">
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="category" class="col-sm-3 col-form-label">Category</label>
-                            <div class="col-sm-9">
-                                <select class="form-select">
-                                    <option>Select Category</option>
+                                <select class="form-select" th:field="*{department}" required>
+                                    <option value="">Select department</option>
+
+                                    <option th:each="department : ${departmenties}" th:value="${department.id}" th:text="${department.name}"></option>
                                 </select>
                             </div>
                         </div>
@@ -55,4 +62,5 @@
         </div>
     </div>
 </body>
+
 </html>
